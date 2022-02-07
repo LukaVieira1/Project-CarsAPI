@@ -24,10 +24,20 @@ const routes = {
     preHandler: upload.single("image"),
     handler: CarsController.create,
   },
+  delCar: {
+    method: "DELETE",
+    url: `/cars`,
+    handler: CarsController.del,
+  },
+  getCar: {
+    method: "GET",
+    url: `/cars`,
+    handler: CarsController.get,
+  },
   createBrand: {
     method: "POST",
     url: "/brand",
-    handler: CarsController.create,
+    handler: BrandController.create,
   },
 };
 

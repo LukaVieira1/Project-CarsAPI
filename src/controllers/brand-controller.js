@@ -1,14 +1,13 @@
 import { prisma } from "../helpers/utils.js";
 
 export const create = async (req, reply) => {
-  const { name, cars } = req.body;
-  const file = req.file;
-  console.log(file);
+  const { name } = req.body;
+  console.log(req.body);
+
   try {
     const brand = await prisma.brand.create({
       data: {
         name,
-        cars,
       },
     });
     return reply.status(201).send(brand);
