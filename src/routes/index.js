@@ -34,10 +34,31 @@ const routes = {
     url: `/cars`,
     handler: CarsController.get,
   },
+  putCar: {
+    method: "PUT",
+    url: `/cars`,
+    preHandler: upload.single("image"),
+    handler: CarsController.put,
+  },
   createBrand: {
     method: "POST",
     url: "/brand",
     handler: BrandController.create,
+  },
+  delBrand: {
+    method: "DELETE",
+    url: `/brand`,
+    handler: BrandController.del,
+  },
+  getBrand: {
+    method: "GET",
+    url: `/brand`,
+    handler: BrandController.get,
+  },
+  putBrand: {
+    method: "PUT",
+    url: `/brand`,
+    handler: BrandController.put,
   },
 };
 
