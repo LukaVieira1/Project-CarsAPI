@@ -34,11 +34,11 @@ const routes = {
     url: `/cars`,
     handler: CarsController.get,
   },
-  putCar: {
-    method: "PUT",
+  updateCar: {
+    method: "PATCH",
     url: `/cars`,
     preHandler: upload.single("image"),
-    handler: CarsController.put,
+    handler: CarsController.update,
   },
   createBrand: {
     method: "POST",

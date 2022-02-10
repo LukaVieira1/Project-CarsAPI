@@ -25,7 +25,7 @@ export const del =
           id: Number(id),
         },
       });
-      reply.json(brand);
+      reply.status(200).send("Brand deletada com sucesso");
     } catch (error) {
       reply.status(500).send({ error: "Deu problema mermão" });
     }

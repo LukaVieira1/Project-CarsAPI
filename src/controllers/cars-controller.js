@@ -3,6 +3,7 @@ import { prisma } from "../helpers/utils.js";
 export const create = async (req, reply) => {
   const { name, year, brand_id } = req.body;
   const file = req.file;
+  console.log(file);
   try {
     const car = await prisma.car.create({
       data: {
@@ -28,7 +29,7 @@ export const del =
           id: Number(id),
         },
       });
-      reply.json(car);
+      reply.status(200).send("Carro deletado com sucesso");
     } catch (error) {
       reply.status(500).send({ error: "Deu problema mermão" });
     }
@@ -60,10 +61,36 @@ export const get =
     }
   });
 
-export const put = async (req, reply) => {
-  const { name, year, brand_id } = req.body;
+export const update = async (req, reply) => {
   const { id } = req.query;
-  const file = req.file;
+  let data = {};
+
+  if (req.body.name) {
+    data.name = req.body.name;
+  }
+
+  if (req.body.year) {
+    data.year = req.body.year;
+  }
+
+  if (req.body.brand_id) {
+    data.brand_id = Number(req.body.brand_id);
+  }
+
+  if (req.file) {
+    data.image_url = req.file.path;
+  }
+
+  try {
+    const car = await prisma.car.update({
+      where: { id: Number(id) },
+      data: data,
+    });
+    return reply.status(200).send(car);
+  } catch (error) {
+    console.log(error);
+    reply.status(500).send(error);
+  }
 
   try {
     const car = await prisma.car.update({
